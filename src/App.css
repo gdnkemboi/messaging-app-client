@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.header > img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}

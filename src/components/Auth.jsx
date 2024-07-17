@@ -2,15 +2,20 @@ import { useParams } from "react-router-dom";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AppContext } from "./App";
 
 function Auth({ setIsAuthenticated }) {
   const { name } = useParams();
+  const { setToken } = useContext(AppContext);
 
   return (
-    <>
-      {name === "signin" && <Signin setIsAuthenticated={setIsAuthenticated} />}
+    <div className="auth-container">
+      {name === "signin" && (
+        <Signin setIsAuthenticated={setIsAuthenticated} setToken={setToken} />
+      )}
       {name === "signup" && <Signup />}
-    </>
+    </div>
   );
 }
 

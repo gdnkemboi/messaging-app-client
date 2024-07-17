@@ -6,6 +6,7 @@ function Signup() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -40,38 +41,59 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="signup-container">
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSignup}>
-        <Input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <br />
+        <h1>Sign Up</h1>
+        <div className="input-box">
+          <Input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
+        </div>
 
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
+        <div className="input-box">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <button type="submit">Sign Up</button>
+        <div className="input-box">
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-box">
+          <Input
+            type="password"
+            placeholder="Re-type Password"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit" className="btn">
+          Sign Up
+        </button>
+        <div className="signin-link">
+          <p>
+            Already have an account? <Link to="/auth/signin">Sign In</Link>
+          </p>
+        </div>
       </form>
-      <p>
-        Already have an account? <Link to="/auth/signin">Sign In</Link>
-      </p>
     </div>
   );
 }

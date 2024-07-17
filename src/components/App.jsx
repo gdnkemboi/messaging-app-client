@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Auth from "./Auth";
-import "../App.css";
+
+export const AppContext = createContext({
+  token: null,
+  setToken: null,
+});
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const validateToken = async (token) => {
@@ -24,6 +29,7 @@ function App() {
         const data = await response.json();
         if (data.valid) {
           setIsAuthenticated(true);
+          setToken(token);
         } else {
           navigate("/auth/signin");
         }
@@ -45,11 +51,13 @@ function App() {
 
   return (
     <>
-      {isAuthenticated ? (
-        <Dashboard setIsAuthenticated={setIsAuthenticated} />
-      ) : (
-        <Auth setIsAuthenticated={setIsAuthenticated} />
-      )}
+      <AppContext.Provider value={{ token, setToken }}>
+        {isAuthenticated ? (
+          <Dashboard setIsAuthenticated={setIsAuthenticated} />
+        ) : (
+          <Auth setIsAuthenticated={setIsAuthenticated} />
+        )}
+      </AppContext.Provider>
     </>
   );
 }

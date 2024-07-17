@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "./Input";
 import PropTypes from "prop-types";
+import "boxicons";
 
-function Signin({ setIsAuthenticated }) {
+function Signin({ setIsAuthenticated, setToken }) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -25,11 +26,12 @@ function Signin({ setIsAuthenticated }) {
         }),
       });
       const data = await response.json();
-      console.log(data)
+      console.log(data);
 
       if (response.status === 200) {
         if (data.token) {
           localStorage.setItem("token", data.token);
+          setToken(data.token);
           setIsAuthenticated(true);
           navigate("/");
         }
@@ -51,36 +53,55 @@ function Signin({ setIsAuthenticated }) {
   };
 
   return (
-    <div>
-      <h2>Sign In</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="signin-container">
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSignin}>
-        <Input
-          type={getInputType(identifier)}
-          placeholder="username or email"
-          value={identifier}
-          onChange={(e) => setIdentifier(e.target.value)}
-        />
-        <br />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <button type="submit">Sign In</button>
-      </form>
+        <h1>Sign In</h1>
+        <div className="input-box">
+          <Input
+            type={getInputType(identifier)}
+            placeholder="Username or Email"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
+            required
+          />
+          <box-icon type="solid" name="user"></box-icon>
+        </div>
 
-      <p>
-        Don&apos;t have an account? <Link to="/auth/signup">Sign Up</Link>
-      </p>
+        <div className="input-box">
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <box-icon type="solid" name="lock-alt"></box-icon>
+        </div>
+
+        <div className="remember-forgot">
+          <label>
+            <Input type="checkbox" />
+            Remember me
+          </label>
+          <Link to="#">Forgot password</Link>
+        </div>
+        <button type="submit" className="btn">
+          Sign In
+        </button>
+        <div className="signup-link">
+          <p>
+            Don&apos;t have an account? <Link to="/auth/signup">Sign Up</Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 }
 
 Signin.propTypes = {
   setIsAuthenticated: PropTypes.func,
+  setToken: PropTypes.func,
 };
 
 export default Signin;
