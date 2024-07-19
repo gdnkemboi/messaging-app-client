@@ -1,17 +1,25 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import Header from "./Header";
+import Navbar from "./Navbar";
 import Auth from "./Auth";
+import Dashboard from "./Dashboard";
 
 export const AppContext = createContext({
-  token: null,
-  setToken: null,
+  token: "",
+  setToken: () => {},
+  user: {},
+  setUser: () => {},
+  setIsAuthenticated: () => {},
 });
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const validateToken = async (token) => {
@@ -39,26 +47,76 @@ function App() {
       }
     };
 
-    if (!isAuthenticated) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        validateToken(token);
-      } else {
-        navigate("/auth/signin");
-      }
+    const token = localStorage.getItem("token");
+    if (token) {
+      validateToken(token);
+    } else {
+      setLoading(false);
+      navigate("/auth/signin");
     }
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    const fetchUserDetails = async (token) => {
+      try {
+        const response = await fetch("http://localhost:3000/users/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+
+        const data = await response.json();
+        setUser(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (token) {
+      fetchUserDetails(token);
+    }
+  }, [token]);
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <box-icon className="bx bxs-like bx-spin"></box-icon>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setToken(null);
+    navigate("/");
+  };
+
   return (
-    <>
-      <AppContext.Provider value={{ token, setToken }}>
-        {isAuthenticated ? (
-          <Dashboard setIsAuthenticated={setIsAuthenticated} />
-        ) : (
-          <Auth setIsAuthenticated={setIsAuthenticated} />
-        )}
-      </AppContext.Provider>
-    </>
+    <AppContext.Provider value={{ token, setToken, user, setIsAuthenticated }}>
+      {isAuthenticated ? (
+        <>
+          <Header />
+          <Navbar />
+          <Dashboard />
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <Auth setIsAuthenticated={setIsAuthenticated} />
+      )}
+    </AppContext.Provider>
   );
 }
 

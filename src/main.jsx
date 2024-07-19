@@ -6,6 +6,10 @@ import Auth from "./components/Auth";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
+import Chats from "./components/Chats";
+import Groups from "./components/Groups";
+import Contacts from "./components/Contacts";
+import Notifications from "./components/Notifications";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -13,7 +17,16 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Dashboard /> },
+      {
+        path: "/",
+        element: <Dashboard />,
+        children: [
+          { index: true, element: <Chats /> },
+          { path: "groups", element: <Groups /> },
+          { path: "contacts", element: <Contacts /> },
+          { path: "notifications", element: <Notifications /> },
+        ],
+      },
       {
         path: "/auth/:name",
         element: <Auth />,

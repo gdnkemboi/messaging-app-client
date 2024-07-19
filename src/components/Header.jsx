@@ -1,18 +1,20 @@
-import PropTypes from "prop-types";
 import Input from "./Input";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "./App";
 
-function Header({ user }) {
+function Header() {
+  const { user } = useContext(AppContext);
   const [value, setValue] = useState("");
   return (
     <div className="header-container">
       <div className="header">
         <div className="logo-container">
           <img src="/src/assets/icons/chat.svg" alt="logo" />
-          <div>ChatApp</div>
+          <h1>ChatApp</h1>
         </div>
 
         <div className="search-container">
+          <box-icon name="search-alt-2"></box-icon>
           <Input
             placeholder="Search..."
             type="text"
@@ -34,9 +36,5 @@ function Header({ user }) {
     </div>
   );
 }
-
-Header.propTypes = {
-  user: PropTypes.object,
-};
 
 export default Header;

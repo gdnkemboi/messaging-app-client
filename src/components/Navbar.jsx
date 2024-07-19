@@ -1,22 +1,45 @@
+import { NavLink } from "react-router-dom";
+
 function Navbar() {
   return (
     <div className="navbar-container">
       <div className="navbar">
-        <div className="icon-container">
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            `icon-container ${isActive ? "active" : ""}`
+          }
+        >
           <img src="/src/assets/icons/chats.svg" alt="chats-icon" />
-        </div>
-        <div className="icon-container">
+        </NavLink>
+        <NavLink
+          to="/groups"
+          className={({ isActive }) =>
+            `icon-container ${isActive ? "active" : ""}`
+          }
+        >
           <img src="/src/assets/icons/groups.svg" alt="groups-icon" />
-        </div>
-        <div className="icon-container">
+        </NavLink>
+        <NavLink
+          to="/contacts"
+          className={({ isActive }) =>
+            `icon-container ${isActive ? "active" : ""}`
+          }
+        >
           <img src="/src/assets/icons/contacts.svg" alt="contacts-icon" />
-        </div>
-        <div className="icon-container">
+        </NavLink>
+        <NavLink
+          to="/notifications"
+          className={({ isActive }) =>
+            `icon-container ${isActive ? "active" : ""}`
+          }
+        >
           <img
             src="/src/assets/icons/notifications.svg"
             alt="notifications-icon"
           />
-        </div>
+        </NavLink>
       </div>
     </div>
   );

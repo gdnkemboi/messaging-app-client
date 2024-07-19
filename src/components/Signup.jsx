@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "./Input";
+import "boxicons"
 
 function Signup() {
   const [username, setUserName] = useState("");
@@ -53,6 +54,7 @@ function Signup() {
             onChange={(e) => setUserName(e.target.value)}
             required
           />
+          <box-icon name='user' type='solid' ></box-icon>
         </div>
 
         <div className="input-box">
@@ -63,6 +65,7 @@ function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <box-icon name='envelope' type='solid' ></box-icon>
         </div>
 
         <div className="input-box">
@@ -73,6 +76,7 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <box-icon name='lock-alt' type='solid' ></box-icon>
         </div>
 
         <div className="input-box">
@@ -83,6 +87,7 @@ function Signup() {
             onChange={(e) => setPassword2(e.target.value)}
             required
           />
+          <box-icon name='lock-alt' type='solid' ></box-icon>
         </div>
 
         <button type="submit" className="btn">
