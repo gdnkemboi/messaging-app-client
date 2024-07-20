@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
 import Signin from "./Signin";
 import Signup from "./Signup";
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AppContext } from "./App";
 
-function Auth({ setIsAuthenticated }) {
+function Auth() {
   const { name } = useParams();
-  const { setToken } = useContext(AppContext);
+  const { setToken, setIsAuthenticated } = useContext(AppContext);
 
   return (
     <div className="auth-container">
@@ -18,9 +17,5 @@ function Auth({ setIsAuthenticated }) {
     </div>
   );
 }
-
-Auth.propTypes = {
-  setIsAuthenticated: PropTypes.func,
-};
 
 export default Auth;
