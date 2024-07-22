@@ -287,34 +287,42 @@
     brightness(96%) contrast(101%);
 }
 
-.chats {
+.chats,
+.groups {
   padding: 20px;
 }
 
-.chat-item {
+.chat-item,
+.group-item {
   display: flex;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
 
-.chat-item .profile-picture {
+.chat-item .profile-picture,
+.group-item .group-icon,
+.group-details .group-icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  object-fit: cover;
 }
 
-.chat-info {
+.chat-info,
+.group-info {
   flex-grow: 1;
 }
 
-.chat-header {
+.chat-header,
+.group-header {
   display: flex;
   justify-content: space-between;
 }
 
-.username {
+.username,
+.group-name {
   font-weight: bold;
 }
 
@@ -327,7 +335,8 @@
 }
 
 .profile-picture {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   object-fit: cover;
 }

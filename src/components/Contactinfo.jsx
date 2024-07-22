@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { ChatContext } from "./Chats";
 import "boxicons";
+import { useNavigate } from "react-router-dom";
 
 function Contactinfo() {
-  const { activeChat, user, token, setChats } = useContext(ChatContext);
+  const { activeChat, user, token, setActiveChat, setChats } =
+    useContext(ChatContext);
   const otherParticipant = activeChat.participants.find(
     (participant) => participant._id !== user._id
   );
+  const navigate = useNavigate();
 
   const handleBlockUser = async () => {
     try {
@@ -56,6 +59,8 @@ function Contactinfo() {
         );
         const data = await response.json();
         setChats(data.chats);
+        setActiveChat(null);
+        navigate("/");
       }
     } catch (error) {
       console.error("An error occurred:", error);

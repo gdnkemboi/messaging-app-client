@@ -1,21 +1,25 @@
 import { useContext, useEffect, useState } from "react";
-import { ChatContext } from "./Chats";
 import Input from "./Input";
+import { GroupContext } from "./Groups";
 
-function Chatroom() {
-  const { token, activeChat, user } = useContext(ChatContext);
+function decodeHTMLEntities(text) {
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = text;
+  return textarea.value;
+}
+
+function Groupchat() {
+  const { token, activeGroup } = useContext(GroupContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const otherParticipant = activeChat.participants.find(
-    (participant) => participant._id !== user._id
-  );
+  console.log(activeGroup);
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/chats/${activeChat._id}/messages`,
+          `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -36,13 +40,13 @@ function Chatroom() {
     };
 
     fetchMessages();
-  }, [activeChat, token]);
+  }, [activeGroup, token]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/messages/${otherParticipant._id}/send`,
+        `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
         {
           method: "POST",
           headers: {
@@ -66,17 +70,17 @@ function Chatroom() {
   };
 
   return (
-    <div className="chatroom">
-      <div className="chatroom-header">
+    <div className="group-chat">
+      <div className="group-chat-header">
         <img
-          src={otherParticipant.profilePicture}
-          alt={`${otherParticipant.username}'s profile`}
+          src={activeGroup.groupIcon}
+          alt={`${activeGroup.name}'s profile`}
           className="profile-picture"
         />
-        <div className="chat-info">
-          <div className="chat-header">
-            <span className="username">{otherParticipant.username}</span>
-            <div className="status">{otherParticipant.status}</div>
+        <div className="group-info">
+          <div className="group-header">
+            <span className="username">{activeGroup.name}</span>
+            <div className="status">{activeGroup.status}</div>
           </div>
           <box-icon name="dots-horizontal-rounded"></box-icon>
         </div>
@@ -85,7 +89,9 @@ function Chatroom() {
       <div className="chatroom-body">
         {messages.map((message) => (
           <div key={message._id} className="message">
-            <div className="message-content">{message.content}</div>
+            <div className="message-content">
+              {decodeHTMLEntities(message.content)}
+            </div>
             <div className="message-timestamp">
               {new Date(message.timestamp).toLocaleTimeString()}
             </div>
@@ -109,4 +115,4 @@ function Chatroom() {
   );
 }
 
-export default Chatroom;
+export default Groupchat;
