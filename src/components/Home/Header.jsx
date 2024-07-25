@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "../Common/Input";
 import { useContext, useState } from "react";
 import { AppContext } from "./App";
 

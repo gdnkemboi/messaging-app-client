@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import Contactdetails from "./Contactdetails";
+import Contactinfo from "./Contactinfo";
 
 const Contacts = () => {
   const [token] = useOutletContext();
@@ -109,7 +109,7 @@ const Contacts = () => {
         </div>
       </div>
       {activeContact && (
-        <Contactdetails activeContact={activeContact} token={token} />
+        <Contactinfo activeContact={activeContact} token={token} />
       )}
     </div>
   );

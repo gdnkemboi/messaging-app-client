@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "boxicons";
 import { useNavigate } from "react-router-dom";
 
-function Contactdetails({ activeContact, token }) {
+function Contactinfo({ activeContact, token }) {
   const contact = activeContact.contact;
   const navigate = useNavigate();
 
@@ -99,9 +99,9 @@ function Contactdetails({ activeContact, token }) {
   );
 }
 
-Contactdetails.propTypes = {
+Contactinfo.propTypes = {
   activeContact: PropTypes.object,
   token: PropTypes.string,
 };
 
-export default Contactdetails;
+export default Contactinfo;

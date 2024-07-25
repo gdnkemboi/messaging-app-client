@@ -3,7 +3,7 @@ import { ChatContext } from "./Chats";
 import "boxicons";
 import { useNavigate } from "react-router-dom";
 
-function Contactinfo() {
+function Chatinfo() {
   const { activeChat, user, token, setActiveChat, setChats } =
     useContext(ChatContext);
   const otherParticipant = activeChat.participants.find(
@@ -104,4 +104,4 @@ function Contactinfo() {
   );
 }
 
-export default Contactinfo;
+export default Chatinfo;

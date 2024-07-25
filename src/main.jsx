@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./components/App";
-import Auth from "./components/Auth";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import Dashboard from "./components/Dashboard";
-import Chats from "./components/Chats";
-import Groups from "./components/Groups";
-import Contacts from "./components/Contacts";
-import Notifications from "./components/Notifications";
+import App from "./components/Home/App";
+import Auth from "./components/Auth/Auth";
+import Signin from "./components/Auth/Signin";
+import Signup from "./components/Auth/Signup";
+import Dashboard from "./components/Home/Dashboard";
+import Chats from "./components/Chats/Chats";
+import Groups from "./components/Groups/Groups";
+import Contacts from "./components/Contacts/Contacts";
+import Notifications from "./components/Notifications/Notifications";
 import "./index.css";
 
 const router = createBrowserRouter([

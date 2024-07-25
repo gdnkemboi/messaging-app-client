@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Input from "./Input";
+import Input from "../Common/Input";
 import PropTypes from "prop-types";
 import "boxicons";
 

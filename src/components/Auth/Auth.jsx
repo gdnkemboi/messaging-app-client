@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import { useContext } from "react";
-import { AppContext } from "./App";
+import { AppContext } from "../Home/App";
 
 function Auth() {
   const { name } = useParams();

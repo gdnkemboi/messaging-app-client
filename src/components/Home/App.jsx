@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import Auth from "./Auth";
+import Auth from "../Auth/Auth";
 import Dashboard from "./Dashboard";
 
 export const AppContext = createContext({

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import Chatslist from "./Chatslist";
 import Chatroom from "./Chatroom";
-import Contactinfo from "./Contactinfo";
+import Contactinfo from "./Chatinfo";
 import { useOutletContext } from "react-router-dom";
 
 export const ChatContext = createContext({
