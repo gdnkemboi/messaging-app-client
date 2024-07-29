@@ -1,0 +1,287 @@
+.chats-container {
+  padding: 10px 15vw;
+  display: flex;
+  flex-direction: column;
+  max-height: 75vh;
+}
+
+.chats {
+  display: flex;
+  gap: 20px;
+  max-height: 100%;
+}
+
+.chats-list,
+.chatroom,
+.chat-information {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  min-height: 70vh;
+}
+
+.chats-list {
+  flex: 1;
+  min-width: 250px;
+  max-width: 25%;
+  padding: 20px;
+  overflow: auto;
+}
+
+.chatroom {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.chat-information {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.chats-list > p {
+  margin: 0 0 20px;
+  font-size: 1.5em;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: white;
+}
+
+.chats-list ul {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chat-item:hover {
+  background-color: #f1f1f1;
+}
+
+.chats-list .chat-info {
+  display: flex;
+  flex: 1;
+}
+
+.chats-list .profile-picture,
+.chatroom .profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chats-list .chat-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: auto;
+}
+
+.chats-list .username {
+  font-weight: bold;
+}
+
+.chats-list .timestamp {
+  font-size: 0.8em;
+  color: #999;
+  margin-left: auto;
+}
+
+.chats-list .last-message {
+  color: #555;
+  font-size: 0.8em;
+}
+
+.chatroom-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chatroom .chat-info {
+  flex: 1;
+  display: flex;
+}
+
+.chatroom .chat-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-right: auto;
+}
+
+.chatroom .status {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.chatroom-body {
+  flex: 1 1 auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 70%;
+  background: url("/src/assets/images/chat-background.webp") no-repeat;
+  background-size: cover;
+  overflow-y: scroll;
+}
+
+.message-container {
+  display: flex;
+  margin: 10px 20px;
+}
+
+.message-container.left {
+  justify-content: flex-start;
+  color: #020617;
+}
+
+.message-container.right {
+  justify-content: flex-end;
+  color: white;
+}
+
+.message-bubble {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 18px;
+  padding: 10px 20px;
+  max-width: 60%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.message-container.right .message-bubble {
+  background-color: #64748b;
+}
+
+.message-container.left .message-bubble {
+  background-color: #cbd5e1;
+}
+
+.message-timestamp {
+  align-self: flex-end;
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.chatroom-footer {
+  padding-top: 10px;
+}
+
+.chatroom-footer form {
+  display: flex;
+}
+
+.chatroom-footer input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.chatroom-footer input[type="text"]:focus,
+.chatroom-footer input[type="text"]:hover {
+  border-color: #eab308;
+  outline: none;
+}
+
+.chatroom-footer button {
+  margin-left: 10px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.chatroom-footer button box-icon {
+  fill: #eab308;
+  height: 40px;
+  width: 40px;
+}
+
+.chat-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.chat-information .chat-details {
+  margin-bottom: auto;
+}
+
+.chat-details > .profile-pic-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-pic-container > .profile-picture {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-information .status {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.about {
+  color: #999;
+}
+
+.chat-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-actions div {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.chat-actions div:hover {
+  background-color: #f1f1f1;
+}
+
+.chat-actions box-icon {
+  margin-right: 10px;
+}
+
+.close-container {
+  display: flex;
+  align-items: center;
+}
+
+.close-container p {
+  margin-left: 10px;
+  font-weight: bold;
+}
