@@ -66,21 +66,23 @@ const Groups = () => {
 
   return (
     <div className="groups-container">
-      <GroupContext.Provider
-        value={{
-          token,
-          groups,
-          setGroups,
-          activeGroup,
-          setActiveGroup,
-          user,
-          setViewGroupInfo,
-        }}
-      >
-        <Groupslist />
-        {activeGroup && <Groupchat />}
-        {viewGroupInfo && <Groupinfo />}
-      </GroupContext.Provider>
+      <div className="groups">
+        <GroupContext.Provider
+          value={{
+            token,
+            groups,
+            setGroups,
+            activeGroup,
+            setActiveGroup,
+            user,
+            setViewGroupInfo,
+          }}
+        >
+          <Groupslist />
+          {activeGroup && <Groupchat />}
+          {viewGroupInfo && <Groupinfo />}
+        </GroupContext.Provider>
+      </div>
     </div>
   );
 };

@@ -48,8 +48,8 @@ function Groupinfo() {
   };
 
   return (
-    <div className="group-info">
-      <div className="group-info-header">
+    <div className="group-information">
+      <div className="group-information-header">
         <div className="close-container">
           <box-icon name="x" onClick={() => setViewGroupInfo(false)}></box-icon>
           <p>Group info</p>
@@ -65,18 +65,42 @@ function Groupinfo() {
             <div className="group-members-count">
               <span>Group&bull;</span>
               <span>
-                {activeGroup.members.length}{" "}
+                {activeGroup.members.length}
                 {activeGroup.members.length > 1 ? "members" : "member"}
               </span>
             </div>
           </div>
-          <div className="group-description">{activeGroup.description}</div>
+          <div className="group-description-container">
+            <div>Description</div>
+            <div className="group-description">{activeGroup.description}</div>
+          </div>
         </div>
       </div>
       <div className="group-members-container">
-        {isUserAdmin(activeGroup, user._id) && <button>+Add members</button>}
+        <div className="add-members-container">
+          <div>
+            {activeGroup.members.length}
+            {activeGroup.members.length > 1 ? " members" : " member"}
+          </div>
+          {isUserAdmin(activeGroup, user._id) && (
+            <button className="add-members-button">+Add</button>
+          )}
+        </div>
+
         {activeGroup.members.map((member) => {
-          return <div key={member._id}>{member.username}</div>;
+          return (
+            <div key={member._id} className="group-member">
+              <img
+                src={member.profilePicture}
+                alt={`${member.username}'s profile`}
+                className="profile-picture"
+              />
+              <div className="member-info">
+                <div className="username">{member.username}</div>
+                <div className="about">{member.about}</div>
+              </div>
+            </div>
+          );
         })}
       </div>
       <div className="group-actions">

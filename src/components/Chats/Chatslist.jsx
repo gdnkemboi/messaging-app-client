@@ -35,7 +35,7 @@ function Chatslist() {
               />
               <div className="chat-info">
                 <div className="chat-header">
-                  <div className="username">{otherParticipant.username}</div>{" "}
+                  <div className="username">{otherParticipant.username}</div>
                   <div className="last-message">
                     {`${chat.lastMessageId.content.slice(0, 10)}${
                       chat.lastMessageId.content.length > 10 ? "..." : ""

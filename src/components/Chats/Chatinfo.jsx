@@ -86,8 +86,10 @@ function Chatinfo() {
           <div className="username">{otherParticipant.username}</div>
           <div className="status">{otherParticipant.status}</div>
         </div>
-        <p>About</p>
-        <p className="about">{otherParticipant.about}</p>
+        <div className="about-container">
+          <p>About</p>
+          <p className="about">{otherParticipant.about}</p>
+        </div>
       </div>
       <div className="chat-actions">
         <div className="block-user" onClick={handleBlockUser}>

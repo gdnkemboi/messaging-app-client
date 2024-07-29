@@ -21,8 +21,8 @@ function Groupslist() {
   }
 
   return (
-    <div className="groups">
-      <h3>ALL GROUPS</h3>
+    <div className="groups-list">
+      <p>ALL GROUPS</p>
       <ul>
         {groups.map((group) => {
           return (
@@ -38,23 +38,24 @@ function Groupslist() {
               />
               <div className="group-info">
                 <div className="group-header">
-                  <span className="group-name">{group.name}</span>
+                  <div className="group-name">{group.name}</div>
                   {group.lastMessageId && (
-                    <span className="timestamp">
-                      {new Date(
-                        group.lastMessageId.timestamp
-                      ).toLocaleTimeString()}
-                    </span>
+                    <div className="last-message">
+                      {`${group.lastMessageSenderId.username}:
+                      ${decodeHTMLEntities(group.lastMessageId.content)}`}
+                    </div>
                   )}
                 </div>
                 {group.lastMessageId && (
-                  <div className="last-message">
-                    <span className="last-message-sender">
-                      {group.lastMessageSenderId.username}:
-                    </span>
-                    <span className="last-message-content">
-                      {decodeHTMLEntities(group.lastMessageId.content)}
-                    </span>
+                  <div className="timestamp">
+                    {new Date(group.lastMessageId.timestamp).toLocaleTimeString(
+                      "en-US",
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                      }
+                    )}
                   </div>
                 )}
               </div>

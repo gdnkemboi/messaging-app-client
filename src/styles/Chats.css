@@ -184,7 +184,7 @@
 }
 
 .chatroom-footer {
-  padding-top: 10px;
+  padding: 10px;
 }
 
 .chatroom-footer form {
@@ -256,9 +256,19 @@
   color: #999;
 }
 
+.about-container {
+  padding: 10px 0;
+  border-top: 1px solid black;
+}
+
+.about-container .about {
+  color: #999;
+}
+
 .chat-actions {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid black;
 }
 
 .chat-actions div {

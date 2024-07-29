@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import Input from "../Common/Input";
 import { GroupContext } from "./Groups";
+import "boxicons";
 
 function decodeHTMLEntities(text) {
   const textarea = document.createElement("textarea");
@@ -9,38 +10,44 @@ function decodeHTMLEntities(text) {
 }
 
 function Groupchat() {
-  const { token, activeGroup, setViewGroupInfo } = useContext(GroupContext);
+  const { token, activeGroup, setViewGroupInfo, user } =
+    useContext(GroupContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const lastMessageRef = useRef(null); // Ref for the last message
 
-  console.log(activeGroup);
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("An error occurred while fetching messages.");
+      }
+
+      const data = await response.json();
+      setMessages(data.messages);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("An error occurred while fetching messages.");
-        }
-
-        const data = await response.json();
-        setMessages(data.messages);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
     fetchMessages();
   }, [activeGroup, token]);
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -62,8 +69,8 @@ function Groupchat() {
       }
 
       const data = await response.json();
-      setMessages((prevMessages) => [...prevMessages, data.message]);
       setNewMessage("");
+      await fetchMessages(); // Fetch all messages again after sending a new message
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -75,31 +82,48 @@ function Groupchat() {
         <img
           src={activeGroup.groupIcon}
           alt={`${activeGroup.name}'s profile`}
-          className="profile-picture"
+          className="group-icon"
         />
         <div className="group-info">
           <div className="group-header">
-            <span className="username">{activeGroup.name}</span>
-            <div className="status">{activeGroup.status}</div>
+            <span className="group-name">{activeGroup.name}</span>
+            <div className="members">
+              {`${activeGroup.members
+                .slice(0, 5)
+                .map((member) => member.username)
+                .join(", ")}${activeGroup.members > 5 ? "..." : ""}`}
+            </div>
           </div>
-          <box-icon name="dots-horizontal-rounded"></box-icon>
+          <box-icon name="dots-vertical-rounded"></box-icon>
         </div>
       </div>
 
-      <div className="chatroom-body">
-        {messages.map((message) => (
-          <div key={message._id} className="message">
-            <div className="message-content">
-              {decodeHTMLEntities(message.content)}
-            </div>
-            <div className="message-timestamp">
-              {new Date(message.timestamp).toLocaleTimeString()}
+      <div className="group-chatroom">
+        {messages.map((message, index) => (
+          <div
+            key={message._id}
+            ref={index === messages.length - 1 ? lastMessageRef : null}
+            className={`message-container ${
+              message.sender._id === user._id ? "right" : "left"
+            }`}
+          >
+            <div className="message-bubble">
+              <div className="message-text">
+                {decodeHTMLEntities(message.content)}
+              </div>
+              <div className="message-timestamp">
+                {new Date(message.timestamp).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                })}
+              </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="chatroom-footer">
+      <div className="group-chatroom-footer">
         <form onSubmit={sendMessage}>
           <Input
             type="text"
@@ -108,7 +132,9 @@ function Groupchat() {
             placeholder="Type a message..."
             required
           />
-          <button type="submit">Send</button>
+          <button type="submit">
+            <box-icon type="logo" name="telegram"></box-icon>
+          </button>
         </form>
       </div>
     </div>
