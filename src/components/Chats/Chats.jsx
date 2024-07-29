@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import Chatslist from "./Chatslist";
 import Chatroom from "./Chatroom";
-import Contactinfo from "./Chatinfo";
+import Chatinfo from "./Chatinfo";
 import { useOutletContext } from "react-router-dom";
+import "/src/styles/Chats.css";
 
 export const ChatContext = createContext({
   token: "",
@@ -11,12 +12,14 @@ export const ChatContext = createContext({
   activeChat: {},
   setActiveChat: () => {},
   user: {},
+  setViewChatInfo: () => {},
 });
 
 function Chats() {
   const [token, user] = useOutletContext();
   const [chats, setChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
+  const [viewChatInfo, setViewChatInfo] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -64,11 +67,21 @@ function Chats() {
   return (
     <div className="chats-container">
       <ChatContext.Provider
-        value={{ token, chats, setChats, activeChat, setActiveChat, user }}
+        value={{
+          token,
+          chats,
+          setChats,
+          activeChat,
+          setActiveChat,
+          user,
+          setViewChatInfo,
+        }}
       >
-        <Chatslist />
-        {activeChat && <Chatroom />}
-        {activeChat && <Contactinfo />}
+        <div className="chats">
+          <Chatslist />
+          {activeChat && <Chatroom />}
+          {viewChatInfo && <Chatinfo />}
+        </div>
       </ChatContext.Provider>
     </div>
   );

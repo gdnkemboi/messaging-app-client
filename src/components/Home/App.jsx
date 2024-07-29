@@ -4,6 +4,7 @@ import Header from "./Header";
 import Navbar from "./Navbar";
 import Auth from "../Auth/Auth";
 import Dashboard from "./Dashboard";
+import "/src/styles/App.css";
 
 export const AppContext = createContext({
   token: "",

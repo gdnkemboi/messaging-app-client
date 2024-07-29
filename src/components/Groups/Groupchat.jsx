@@ -9,7 +9,7 @@ function decodeHTMLEntities(text) {
 }
 
 function Groupchat() {
-  const { token, activeGroup } = useContext(GroupContext);
+  const { token, activeGroup, setViewGroupInfo } = useContext(GroupContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -71,7 +71,7 @@ function Groupchat() {
 
   return (
     <div className="group-chat">
-      <div className="group-chat-header">
+      <div className="group-chat-header" onClick={() => setViewGroupInfo(true)}>
         <img
           src={activeGroup.groupIcon}
           alt={`${activeGroup.name}'s profile`}

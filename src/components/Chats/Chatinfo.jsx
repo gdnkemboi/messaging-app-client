@@ -4,7 +4,7 @@ import "boxicons";
 import { useNavigate } from "react-router-dom";
 
 function Chatinfo() {
-  const { activeChat, user, token, setActiveChat, setChats } =
+  const { activeChat, user, token, setActiveChat, setChats, setViewChatInfo } =
     useContext(ChatContext);
   const otherParticipant = activeChat.participants.find(
     (participant) => participant._id !== user._id
@@ -68,25 +68,28 @@ function Chatinfo() {
   };
 
   return (
-    <div className="contact-info">
-      <div className="contact-info-header">
+    <div className="chat-information">
+      <div className="chat-information-header">
         <div className="close-container">
-          <box-icon name="x"></box-icon>
+          <box-icon name="x" onClick={() => setViewChatInfo(false)}></box-icon>
           <p>Contact info</p>
         </div>
       </div>
-      <div className="contact-details">
+      <div className="chat-details">
         <div className="profile-pic-container">
           <img
             src={otherParticipant.profilePicture}
             alt={`${otherParticipant.username}'s profile`}
             className="profile-picture"
           />
+
+          <div className="username">{otherParticipant.username}</div>
           <div className="status">{otherParticipant.status}</div>
         </div>
         <p>About</p>
+        <p className="about">{otherParticipant.about}</p>
       </div>
-      <div className="contact-actions">
+      <div className="chat-actions">
         <div className="block-user" onClick={handleBlockUser}>
           <box-icon name="block"></box-icon>
           <p>{`Block ${otherParticipant.username}`}</p>

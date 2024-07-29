@@ -1,0 +1,124 @@
+.header-container {
+  background-color: #eab308;
+  padding-top: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: 10vh;
+  padding: 0 20px;
+  background-color: white;
+  box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.logo-container,
+.profile-pic-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container > img {
+  width: 45px;
+  height: 45px;
+}
+
+.logo-container > h1 {
+  font-weight: 500;
+}
+
+.search-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 40vw;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 20px;
+  padding-left: 40px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.search-container box-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  fill: #ccc;
+}
+
+.search-input:focus,
+.search-input:hover {
+  border-color: #eab308;
+  outline: none;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar-container {
+  margin: 0 30vw;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 18px;
+  position: relative;
+  transition: color 0.3s;
+  text-decoration: none; /* Ensure the links have no underline */
+}
+
+.icon-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #eab308;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.icon-container:hover::before,
+.icon-container.active::before {
+  transform: scaleX(1);
+}
+
+.icon-container img {
+  width: 25px;
+  height: 25px;
+  transition: filter 0.3s;
+}
+
+.icon-container:hover img,
+.icon-container.active img {
+  filter: invert(41%) sepia(98%) saturate(2044%) hue-rotate(0deg)
+    brightness(96%) contrast(101%);
+}

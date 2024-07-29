@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import Groupslist from "./Groupslist";
 import Groupchat from "./Groupchat";
 import Groupinfo from "./Groupinfo";
+import "/src/styles/Groups.css";
 
 export const GroupContext = createContext({
   token: "",
@@ -11,12 +12,14 @@ export const GroupContext = createContext({
   activeGroup: {},
   setActiveGroup: () => {},
   user: {},
+  setViewGroupInfo: () => {},
 });
 
 const Groups = () => {
   const [token, user] = useOutletContext();
   const [groups, setGroups] = useState([]);
   const [activeGroup, setActiveGroup] = useState(null);
+  const [viewGroupInfo, setViewGroupInfo] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -64,11 +67,19 @@ const Groups = () => {
   return (
     <div className="groups-container">
       <GroupContext.Provider
-        value={{ token, groups, setGroups, activeGroup, setActiveGroup, user }}
+        value={{
+          token,
+          groups,
+          setGroups,
+          activeGroup,
+          setActiveGroup,
+          user,
+          setViewGroupInfo,
+        }}
       >
         <Groupslist />
         {activeGroup && <Groupchat />}
-        {activeGroup && <Groupinfo />}
+        {viewGroupInfo && <Groupinfo />}
       </GroupContext.Provider>
     </div>
   );

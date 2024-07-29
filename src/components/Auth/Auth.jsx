@@ -3,6 +3,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { useContext } from "react";
 import { AppContext } from "../Home/App";
+import "/src/styles/Auth.css"
 
 function Auth() {
   const { name } = useParams();

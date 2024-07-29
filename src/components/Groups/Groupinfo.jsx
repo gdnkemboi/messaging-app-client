@@ -4,8 +4,14 @@ import "boxicons";
 import { useNavigate } from "react-router-dom";
 
 function Groupinfo() {
-  const { activeGroup, user, token, setActiveGroup, setGroups } =
-    useContext(GroupContext);
+  const {
+    activeGroup,
+    user,
+    token,
+    setActiveGroup,
+    setGroups,
+    setViewGroupInfo,
+  } = useContext(GroupContext);
   const navigate = useNavigate();
 
   function isUserAdmin(group, userId) {
@@ -45,7 +51,7 @@ function Groupinfo() {
     <div className="group-info">
       <div className="group-info-header">
         <div className="close-container">
-          <box-icon name="x"></box-icon>
+          <box-icon name="x" onClick={() => setViewGroupInfo(false)}></box-icon>
           <p>Group info</p>
         </div>
         <div className="group-details">

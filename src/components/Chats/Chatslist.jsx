@@ -15,8 +15,8 @@ function Chatslist() {
   }
 
   return (
-    <div className="chats">
-      <h3>ALL CHATS</h3>
+    <div className="chats-list">
+      <p>ALL CHATS</p>
       <ul>
         {chats.map((chat) => {
           const otherParticipant = chat.participants.find(
@@ -35,14 +35,23 @@ function Chatslist() {
               />
               <div className="chat-info">
                 <div className="chat-header">
-                  <span className="username">{otherParticipant.username}</span>
-                  <span className="timestamp">
-                    {new Date(
-                      chat.lastMessageId.timestamp
-                    ).toLocaleTimeString()}
-                  </span>
+                  <div className="username">{otherParticipant.username}</div>{" "}
+                  <div className="last-message">
+                    {`${chat.lastMessageId.content.slice(0, 10)}${
+                      chat.lastMessageId.content.length > 10 ? "..." : ""
+                    }`}
+                  </div>
                 </div>
-                <div className="last-message">{chat.lastMessageId.content}</div>
+                <div className="timestamp">
+                  {new Date(chat.lastMessageId.timestamp).toLocaleTimeString(
+                    "en-US",
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    }
+                  )}
+                </div>
               </div>
             </li>
           );

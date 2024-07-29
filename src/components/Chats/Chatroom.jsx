@@ -1,42 +1,50 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "./Chats";
 import Input from "../Common/Input";
+import "boxicons";
 
 function Chatroom() {
-  const { token, activeChat, user } = useContext(ChatContext);
+  const { token, activeChat, user, setViewChatInfo } = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const lastMessageRef = useRef(null); // Ref for the last message
 
   const otherParticipant = activeChat.participants.find(
     (participant) => participant._id !== user._id
   );
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/chats/${activeChat._id}/messages`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("An error occurred while fetching messages.");
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/chats/${activeChat._id}/messages`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
+      );
 
-        const data = await response.json();
-        setMessages(data.messages);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
+      if (!response.ok) {
+        throw new Error("An error occurred while fetching messages.");
       }
-    };
 
+      const data = await response.json();
+      setMessages(data.messages);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchMessages();
   }, [activeChat, token]);
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -58,8 +66,8 @@ function Chatroom() {
       }
 
       const data = await response.json();
-      setMessages((prevMessages) => [...prevMessages, data.message]);
       setNewMessage("");
+      await fetchMessages(); // Fetch all messages again after sending a new message
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -67,7 +75,7 @@ function Chatroom() {
 
   return (
     <div className="chatroom">
-      <div className="chatroom-header">
+      <div className="chatroom-header" onClick={() => setViewChatInfo(true)}>
         <img
           src={otherParticipant.profilePicture}
           alt={`${otherParticipant.username}'s profile`}
@@ -78,16 +86,28 @@ function Chatroom() {
             <span className="username">{otherParticipant.username}</span>
             <div className="status">{otherParticipant.status}</div>
           </div>
-          <box-icon name="dots-horizontal-rounded"></box-icon>
+          <box-icon name="dots-vertical-rounded"></box-icon>
         </div>
       </div>
 
       <div className="chatroom-body">
-        {messages.map((message) => (
-          <div key={message._id} className="message">
-            <div className="message-content">{message.content}</div>
-            <div className="message-timestamp">
-              {new Date(message.timestamp).toLocaleTimeString()}
+        {messages.map((message, index) => (
+          <div
+            key={message._id}
+            ref={index === messages.length - 1 ? lastMessageRef : null}
+            className={`message-container ${
+              message.sender._id === user._id ? "right" : "left"
+            }`}
+          >
+            <div className="message-bubble">
+              <div className="message-text">{message.content}</div>
+              <div className="message-timestamp">
+                {new Date(message.timestamp).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                })}
+              </div>
             </div>
           </div>
         ))}
@@ -102,7 +122,9 @@ function Chatroom() {
             placeholder="Type a message..."
             required
           />
-          <button type="submit">Send</button>
+          <button type="submit">
+            <box-icon type="logo" name="telegram"></box-icon>
+          </button>
         </form>
       </div>
     </div>
