@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import "/src/styles/Notifications.css";
 
 const Notifications = () => {
   const [token] = useOutletContext();
@@ -60,6 +61,9 @@ const Notifications = () => {
     }
   };
 
+  /// TODO ///
+  const handleMarkAsRead = () => {};
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -76,19 +80,22 @@ const Notifications = () => {
     <div className="notifications-container">
       <div className="notifs-header">
         <h3>Notifications</h3>
-        <button className="btn" onClick={handleMarkAllAsRead}>
+        <div className="btn" onClick={handleMarkAllAsRead}>
           Mark all as Read
-        </button>
+        </div>
       </div>
       <div className="notifications">
         {notifications.length > 0 ? (
           notifications.map((notification) => (
             <div key={notification._id} className="notification">
-              {notification.content}
+              <div className="notification-content">{notification.content}</div>
+              <div className="mark-as-read" onClick={handleMarkAsRead}>
+                Mark as Read
+              </div>
             </div>
           ))
         ) : (
-          <div>No new notifications.</div>
+          <div className="no-notifs">No new notifications.</div>
         )}
       </div>
     </div>
