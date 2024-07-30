@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import "boxicons";
-import { useNavigate } from "react-router-dom";
 
-function Contactinfo({ activeContact, token }) {
+function Contactinfo({ activeContact, token, setActiveContact }) {
   const contact = activeContact.contact;
-  const navigate = useNavigate();
+
+  /// TODO ///
+  const handleAddContacts = async () => {};
 
   const handleBlockUser = async () => {
     try {
@@ -31,42 +32,14 @@ function Contactinfo({ activeContact, token }) {
     }
   };
 
-  const handleDeleteChat = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/chats/${activeChat._id}`,
-        {
-          method: "DELETE", // Use DELETE method to delete a chat
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("An error occurred. Please try again.");
-      }
-
-      if (response.status === 200) {
-        console.log(
-          `Chat with ${otherParticipant.username} deleted successfully`
-        );
-        const data = await response.json();
-        setChats(data.chats);
-        setActiveChat(null);
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+  /// TODO ///
+  const handleDeleteContact = async () => {};
 
   return (
     <div className="contact-info">
       <div className="contact-info-header">
         <div className="close-container">
-          <box-icon name="x"></box-icon>
+          <box-icon name="x" onClick={() => setActiveContact(null)}></box-icon>
           <p>Contact info</p>
         </div>
       </div>
@@ -77,22 +50,48 @@ function Contactinfo({ activeContact, token }) {
             alt={`${contact.username}'s profile`}
             className="profile-picture"
           />
+          <div className="username">{contact.username}</div>
           <div className="status">{contact.status}</div>
+          <box-icon name="message-square-detail"></box-icon>
         </div>
-        <p>About</p>
+        <div className="about-container">
+          <p>About</p>
+          <p className="about">{contact.about}</p>
+        </div>
       </div>
       <div className="contact-actions">
-        <div className="block-user" onClick={handleBlockUser}>
-          <box-icon name="block"></box-icon>
-          <p>{`Block ${contact.username}`}</p>
-        </div>
+        {activeContact.status === "pending" && (
+          <div className="add-contacts" onClick={handleAddContacts}>
+            <box-icon type="solid" name="contact"></box-icon>
+            <p>Add to contacts</p>
+          </div>
+        )}
+
+        {activeContact.status === "accepted" && (
+          <div className="block-user" onClick={handleBlockUser}>
+            <box-icon name="block"></box-icon>
+            <p>{`Block ${contact.username}`}</p>
+          </div>
+        )}
+
+        {activeContact.status === "blocked" && (
+          <div className="block-user" onClick={handleAddContacts}>
+            <box-icon name="lock-open"></box-icon>
+            <p>{`Unblock ${contact.username}`}</p>
+          </div>
+        )}
+
+        {activeContact.status === "accepted" ||
+        activeContact.status === "pending" ? (
+          <div className="delete-contact" onClick={handleDeleteContact}>
+            <box-icon name="trash"></box-icon>
+            <p>Remove from contacts</p>
+          </div>
+        ) : null}
+
         <div className="report-user">
           <box-icon name="dislike"></box-icon>
           <p>{`Report ${contact.username}`}</p>
-        </div>
-        <div className="delete-chat" onClick={handleDeleteChat}>
-          <box-icon name="trash"></box-icon>
-          <p>Delete chat</p>
         </div>
       </div>
     </div>
@@ -102,6 +101,7 @@ function Contactinfo({ activeContact, token }) {
 Contactinfo.propTypes = {
   activeContact: PropTypes.object,
   token: PropTypes.string,
+  setActiveContact: PropTypes.func,
 };
 
 export default Contactinfo;

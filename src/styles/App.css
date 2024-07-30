@@ -90,7 +90,7 @@
   padding: 20px 20px 18px;
   position: relative;
   transition: color 0.3s;
-  text-decoration: none; /* Ensure the links have no underline */
+  text-decoration: none;
 }
 
 .icon-container::before {

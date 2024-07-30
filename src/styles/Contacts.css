@@ -1,0 +1,168 @@
+.contacts-container {
+  padding: 10px 25vw;
+  display: flex;
+  max-height: 75vh;
+  gap: 20px;
+}
+
+.contacts-container .contacts,
+.contacts-container > .contact-info {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  min-height: 70vh;
+}
+
+.contacts-container > .contacts {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 100%;
+}
+
+.contacts-container > .contact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.contacts-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-navbar div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 18px;
+  position: relative;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.contacts-navbar div::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #eab308;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.contacts-navbar div:hover::before,
+.contacts-navbar div.active::before {
+  transform: scaleX(1);
+}
+
+.contacts-navbar div:hover,
+.contacts-navbar div.active {
+  filter: invert(41%) sepia(98%) saturate(2044%) hue-rotate(0deg)
+    brightness(96%) contrast(101%);
+}
+
+.contact {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.contact:hover {
+  background-color: #f1f1f1;
+}
+
+.contact .profile-picture {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.contact .contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contact-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.contact-info .contact-details {
+  margin-bottom: auto;
+}
+
+.contact-details > .profile-pic-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-pic-container > .profile-picture {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-info .status {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.contact-info .about-container {
+  padding: 10px 0;
+  border-top: 1px solid black;
+}
+
+.contact-info .about-container .about {
+  color: #999;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid black;
+  padding: 10px 0;
+}
+
+.contact-actions div {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.contact-actions div:hover {
+  background-color: #f1f1f1;
+}
+
+.contact-actions box-icon {
+  margin-right: 10px;
+}
+
+.close-container {
+  display: flex;
+  align-items: center;
+}
+
+.close-container p {
+  margin-left: 10px;
+  font-weight: bold;
+}
