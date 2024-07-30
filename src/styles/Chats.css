@@ -252,33 +252,33 @@
   color: #999;
 }
 
-.about {
+.chats .about {
   color: #999;
 }
 
-.about-container {
+.chats .about-container {
   padding: 10px 0;
   border-top: 1px solid black;
 }
 
-.about-container .about {
+.chats .about-container .about {
   color: #999;
 }
 
-.chat-actions {
+.chats .chat-actions {
   display: flex;
   flex-direction: column;
   border-top: 1px solid black;
 }
 
-.chat-actions div {
+.chats .chat-actions div {
   display: flex;
   align-items: center;
   padding: 10px 0;
   cursor: pointer;
 }
 
-.chat-actions div:hover {
+.chats .chat-actions div:hover {
   background-color: #f1f1f1;
 }
 

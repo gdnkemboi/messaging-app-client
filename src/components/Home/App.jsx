@@ -106,14 +106,15 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ token, setToken, user, setIsAuthenticated }}>
+    <AppContext.Provider
+      value={{ token, setToken, user, setIsAuthenticated, handleLogout }}
+    >
       {isAuthenticated ? (
         user && (
           <>
             <Header />
             <Navbar />
             <Dashboard />
-            <button onClick={handleLogout}>Logout</button>
           </>
         )
       ) : (
