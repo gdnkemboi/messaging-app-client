@@ -13,6 +13,7 @@ export const GroupContext = createContext({
   setActiveGroup: () => {},
   user: {},
   setViewGroupInfo: () => {},
+  fetchGroups: () => {},
 });
 
 const Groups = () => {
@@ -23,30 +24,30 @@ const Groups = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchGroups = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/groups", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  const fetchGroups = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/groups", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if (!response.ok) {
-          throw new Error("An error occured!");
-        }
-
-        const data = await response.json();
-        console.log(data);
-        setGroups(data.groups);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error("An error occured!");
       }
-    };
 
+      const data = await response.json();
+      console.log(data);
+      setGroups(data.groups);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchGroups();
   }, []);
 
@@ -76,6 +77,7 @@ const Groups = () => {
             setActiveGroup,
             user,
             setViewGroupInfo,
+            fetchGroups,
           }}
         >
           <Groupslist />

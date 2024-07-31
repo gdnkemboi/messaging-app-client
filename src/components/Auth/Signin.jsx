@@ -26,7 +26,6 @@ function Signin({ setIsAuthenticated, setToken }) {
         }),
       });
       const data = await response.json();
-      console.log(data);
 
       if (response.status === 200) {
         if (data.token) {

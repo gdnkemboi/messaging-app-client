@@ -10,7 +10,7 @@ function decodeHTMLEntities(text) {
 }
 
 function Groupchat() {
-  const { token, activeGroup, setViewGroupInfo, user } =
+  const { token, activeGroup, setViewGroupInfo, user, fetchGroups } =
     useContext(GroupContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -70,7 +70,8 @@ function Groupchat() {
 
       const data = await response.json();
       setNewMessage("");
-      await fetchMessages(); // Fetch all messages again after sending a new message
+      fetchMessages(); // Fetch all messages again after sending a new message
+      fetchGroups();
     } catch (error) {
       console.error("Error sending message:", error);
     }

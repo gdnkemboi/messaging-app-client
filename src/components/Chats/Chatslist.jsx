@@ -57,7 +57,7 @@ function Chatslist() {
 
       const data = await response.json();
 
-      console.log(data)
+      console.log(data);
       setActiveChat(data.chat);
       setIsModalOpen(false);
     } catch (error) {
@@ -126,7 +126,11 @@ function Chatslist() {
         <box-icon name="message-alt-add"></box-icon>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Select a contact to start a chat"
+      >
         <div className="contacts">
           {contacts.map((contact) => (
             <div

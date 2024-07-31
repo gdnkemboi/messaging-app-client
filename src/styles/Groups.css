@@ -25,8 +25,8 @@
   flex: 1;
   min-width: 250px;
   max-width: 25%;
-  padding: 20px;
   overflow: auto;
+  position: relative;
 }
 
 .group-chat {
@@ -45,12 +45,11 @@
 }
 
 .groups-list > p {
-  margin: 0 0 20px;
-  font-size: 1.5em;
   position: sticky;
   top: 0;
   z-index: 999;
   background-color: white;
+  padding: 15px;
 }
 
 .groups-list ul {
@@ -102,6 +101,25 @@
 .groups-list .last-message {
   color: #555;
   font-size: 0.8em;
+}
+
+.create-group {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  position: sticky;
+  bottom: 20px;
+  left: 75%;
+  background-color: #eab308;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.create-group box-icon {
+  fill: white;
 }
 
 .group-chat-header {
@@ -334,4 +352,39 @@
 .close-container p {
   margin-left: 10px;
   font-weight: bold;
+}
+
+.modal .create-group-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.create-group-form .input-box {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #eab308;
+}
+
+.create-group-form .input-box input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding: 20px 0 0 0;
+}
+
+.create-group-form .btn {
+  align-self: flex-start;
+  width: 100%;
+  height: 45px;
+  background: #eab308;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
 }
