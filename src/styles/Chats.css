@@ -17,16 +17,15 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  min-height: 70vh;
+  min-height: 40vh;
 }
 
 .chats-list {
   flex: 1;
   min-width: 250px;
   max-width: 25%;
-  padding: 20px;
   overflow: auto;
+  position: relative;
 }
 
 .chatroom {
@@ -44,12 +43,11 @@
 }
 
 .chats-list > p {
-  margin: 0 0 20px;
-  font-size: 1.5em;
   position: sticky;
   top: 0;
   z-index: 999;
   background-color: white;
+  padding: 15px;
 }
 
 .chats-list ul {
@@ -101,6 +99,25 @@
 .chats-list .last-message {
   color: #555;
   font-size: 0.8em;
+}
+
+.create-chat {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  position: sticky;
+  bottom: 20px;
+  left: 75%;
+  background-color: #eab308;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.create-chat box-icon {
+  fill: white;
 }
 
 .chatroom-header {
@@ -294,4 +311,21 @@
 .close-container p {
   margin-left: 10px;
   font-weight: bold;
+}
+
+.modal .contacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+.modal .profile-picture {
+  width: 30px;
+  height: 30px;
 }

@@ -13,6 +13,7 @@ export const ChatContext = createContext({
   setActiveChat: () => {},
   user: {},
   setViewChatInfo: () => {},
+  fetchChats: () => {},
 });
 
 function Chats() {
@@ -75,6 +76,7 @@ function Chats() {
           setActiveChat,
           user,
           setViewChatInfo,
+          fetchChats,
         }}
       >
         <div className="chats">

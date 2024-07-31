@@ -4,7 +4,8 @@ import Input from "../Common/Input";
 import "boxicons";
 
 function Chatroom() {
-  const { token, activeChat, user, setViewChatInfo } = useContext(ChatContext);
+  const { token, activeChat, user, setViewChatInfo, fetchChats } =
+    useContext(ChatContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const lastMessageRef = useRef(null); // Ref for the last message
@@ -31,6 +32,7 @@ function Chatroom() {
 
       const data = await response.json();
       setMessages(data.messages);
+      fetchChats();
     } catch (error) {
       console.error("Error fetching messages:", error);
     }

@@ -74,8 +74,6 @@
   border-radius: 50%;
 }
 
-/*////*/
-
 .sidebar {
   position: fixed;
   right: -25vw;
@@ -171,8 +169,6 @@
 .profile-actions box-icon {
   margin-right: 10px;
 }
-
-/*////*/
 
 .navbar-container {
   margin: 0 30vw;
