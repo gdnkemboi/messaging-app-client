@@ -38,7 +38,6 @@ function Chats() {
       }
 
       const data = await response.json();
-      console.log(data);
       setChats(data.chats);
       setLoading(false);
     } catch (error) {
@@ -62,8 +61,6 @@ function Chats() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  console.log(activeChat);
 
   return (
     <div className="chats-container">

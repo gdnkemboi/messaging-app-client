@@ -1,9 +1,20 @@
-# React + Vite
+# Chat Application Web Client Built with React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a WhatsApp-like Chat application with the following features:
 
-Currently, two official plugins are available:
+- **Signup and Signin**: Using a username and password (optionally with an email).
+- **One-on-One Messaging**: Communicate with other users.
+- **Group Messaging**: Create and participate in group chats.
+- **Adding Contacts**: Easily add and manage contacts.
+- **Notifications**: Receive notifications on important actions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# messaging-app-client
+## TODO
+
+- Add options in chatroom and group chat room.
+- Implement delete group feature.
+- Implement contact actions.
+- Implement user search.
+- Implement edit profile and group info.
+- Implement real-time functionalities (sending messages, messages read status, user online status).
+
+Feel free to contribute or raise issues!

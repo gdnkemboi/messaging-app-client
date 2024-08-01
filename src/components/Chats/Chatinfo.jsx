@@ -41,7 +41,7 @@ function Chatinfo() {
       const response = await fetch(
         `http://localhost:3000/api/chats/${activeChat._id}`,
         {
-          method: "DELETE", // Use DELETE method to delete a chat
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -58,8 +58,9 @@ function Chatinfo() {
           `Chat with ${otherParticipant.username} deleted successfully`
         );
         const data = await response.json();
-        setChats(data.chats);
         setActiveChat(null);
+        setViewChatInfo(false);
+        setChats(data.chats);
         navigate("/");
       }
     } catch (error) {

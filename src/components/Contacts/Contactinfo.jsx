@@ -5,6 +5,9 @@ function Contactinfo({ activeContact, token, setActiveContact }) {
   const contact = activeContact.contact;
 
   /// TODO ///
+  const handleSendMessage = () => {};
+
+  /// TODO ///
   const handleAddContacts = async () => {};
 
   const handleBlockUser = async () => {
@@ -52,7 +55,6 @@ function Contactinfo({ activeContact, token, setActiveContact }) {
           />
           <div className="username">{contact.username}</div>
           <div className="status">{contact.status}</div>
-          <box-icon name="message-square-detail"></box-icon>
         </div>
         <div className="about-container">
           <p>About</p>
@@ -60,6 +62,11 @@ function Contactinfo({ activeContact, token, setActiveContact }) {
         </div>
       </div>
       <div className="contact-actions">
+        <div className="send-message" onClick={handleSendMessage}>
+          <box-icon name="message-square-detail"></box-icon>
+          <p>Send message</p>
+        </div>
+
         {activeContact.status === "pending" && (
           <div className="add-contacts" onClick={handleAddContacts}>
             <box-icon type="solid" name="contact"></box-icon>

@@ -182,6 +182,10 @@ function Groupinfo() {
           <box-icon name="exit"></box-icon>
           <p>Leave group</p>
         </div>
+        <div className="delete-group">
+          <box-icon name="trash"></box-icon>
+          <p>Delete group</p>
+        </div>
         <div className="report-group">
           <box-icon name="dislike"></box-icon>
           <p>Report group</p>
