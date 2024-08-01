@@ -375,7 +375,8 @@
   padding: 20px 0 0 0;
 }
 
-.create-group-form .btn {
+.create-group-form .btn, 
+.add-members .btn {
   align-self: flex-start;
   width: 100%;
   height: 45px;
@@ -387,4 +388,44 @@
   font-size: 16px;
   color: white;
   font-weight: 600;
+}
+
+.modal .add-members {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.users-to-add {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-to-add {
+  display: flex;
+  padding: 5px 10px 5px 5px;
+}
+
+.user-to-add > div{
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 10px;
+  margin-right: auto;
+}
+
+.user-to-add:hover {
+  background-color: #f1f1f1;
+}
+
+.user-to-add img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-to-add-info {
+  display: flex;
+  align-items: center;
 }

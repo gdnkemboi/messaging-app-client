@@ -38,7 +38,6 @@ const Groups = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       setGroups(data.groups);
       setLoading(false);
     } catch (error) {
@@ -62,8 +61,6 @@ const Groups = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  console.log(activeGroup);
 
   return (
     <div className="groups-container">

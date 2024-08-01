@@ -7,6 +7,7 @@ function Input({
   onChange,
   required = false,
   className,
+  checked,
 }) {
   return (
     <input
@@ -16,6 +17,7 @@ function Input({
       onChange={onChange}
       required={required}
       className={className}
+      checked={checked}
     />
   );
 }
@@ -27,6 +29,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   required: PropTypes.bool,
   className: PropTypes.string,
+  checked: PropTypes.bool,
 };
 
 export default Input;

@@ -130,7 +130,9 @@ function Groupslist() {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <button type="submit" className="btn">Create Group</button>
+          <button type="submit" className="btn">
+            Create Group
+          </button>
         </form>
       </Modal>
     </div>
