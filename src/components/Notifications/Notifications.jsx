@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import "/src/styles/Notifications.css";
 
 const Notifications = () => {
-  const [token] = useOutletContext();
+  const { token, apiURL } = useOutletContext();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,15 +12,12 @@ const Notifications = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/notifications",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${apiURL}/notifications`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!response.ok) {
           throw new Error("An error occured");
@@ -35,20 +32,17 @@ const Notifications = () => {
     };
 
     fetchNotifications();
-  }, []);
+  }, [apiURL, token]);
 
   const handleMarkAllAsRead = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/notifications/read",
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${apiURL}/notifications/read`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("An error occured");

@@ -2,6 +2,7 @@ import Input from "../Common/Input";
 import { useContext, useState } from "react";
 import { AppContext } from "./App";
 import { useNavigate } from "react-router-dom";
+import logo from "/src/assets/icons/chat.svg";
 
 function Header() {
   const { user, handleLogout } = useContext(AppContext);
@@ -17,7 +18,7 @@ function Header() {
     <div className="header-container">
       <div className="header">
         <div className="logo-container" onClick={() => navigate("/")}>
-          <img src="/src/assets/icons/chat.svg" alt="logo" />
+          <img src={logo} alt="logo" />
           <h1>ChatApp</h1>
         </div>
 

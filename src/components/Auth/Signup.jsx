@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../Common/Input";
 import "boxicons";
+import PropTypes from "prop-types";
 
-function Signup() {
+function Signup({ apiURL }) {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ function Signup() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/users/signup", {
+      const response = await fetch(`${apiURL}/users/signup`, {
         mode: "cors",
         method: "POST",
         headers: {
@@ -102,5 +103,9 @@ function Signup() {
     </div>
   );
 }
+
+Signup.propTypes = {
+  apiURL: PropTypes.string,
+};
 
 export default Signup;

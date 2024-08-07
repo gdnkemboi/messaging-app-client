@@ -11,7 +11,7 @@ function decodeHTMLEntities(text) {
 }
 
 function Groupslist() {
-  const { groups, setActiveGroup, token, fetchGroups } =
+  const { groups, setActiveGroup, token, fetchGroups, apiURL } =
     useContext(GroupContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
@@ -25,7 +25,7 @@ function Groupslist() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/groups", {
+      const response = await fetch(`${apiURL}/groups`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

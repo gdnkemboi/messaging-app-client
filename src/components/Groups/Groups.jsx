@@ -14,10 +14,11 @@ export const GroupContext = createContext({
   user: {},
   setViewGroupInfo: () => {},
   fetchGroups: () => {},
+  apiURL: "",
 });
 
 const Groups = () => {
-  const [token, user] = useOutletContext();
+  const { token, user, apiURL } = useOutletContext();
   const [groups, setGroups] = useState([]);
   const [activeGroup, setActiveGroup] = useState(null);
   const [viewGroupInfo, setViewGroupInfo] = useState(false);
@@ -26,7 +27,7 @@ const Groups = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/groups", {
+      const response = await fetch(`${apiURL}/groups`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -75,6 +76,7 @@ const Groups = () => {
             user,
             setViewGroupInfo,
             fetchGroups,
+            apiURL,
           }}
         >
           <Groupslist />

@@ -4,7 +4,7 @@ import Contactinfo from "./Contactinfo";
 import "/src/styles/Contacts.css";
 
 const Contacts = () => {
-  const [token] = useOutletContext();
+  const { token, apiURL } = useOutletContext();
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState(null);
   const [displayContacts, setDisplayContacts] = useState(true);
@@ -13,10 +13,12 @@ const Contacts = () => {
   const [loading, setLoading] = useState(true);
   const [error, settError] = useState(null);
 
+  console.log(apiURL);
+
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/contacts", {
+        const response = await fetch(`${apiURL}/contacts`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -37,7 +39,7 @@ const Contacts = () => {
     };
 
     fetchContacts();
-  }, []);
+  }, [apiURL, token]);
 
   if (loading) {
     return (
@@ -164,6 +166,7 @@ const Contacts = () => {
           activeContact={activeContact}
           token={token}
           setActiveContact={setActiveContact}
+          apiURL={apiURL}
         />
       )}
     </div>

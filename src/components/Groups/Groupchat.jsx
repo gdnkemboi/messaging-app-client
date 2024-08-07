@@ -10,7 +10,7 @@ function decodeHTMLEntities(text) {
 }
 
 function Groupchat() {
-  const { token, activeGroup, setViewGroupInfo, user, fetchGroups } =
+  const { token, activeGroup, setViewGroupInfo, user, fetchGroups, apiURL } =
     useContext(GroupContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -19,7 +19,7 @@ function Groupchat() {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
+        `${apiURL}/groups/${activeGroup._id}/messages`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function Groupchat() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/groups/${activeGroup._id}/messages`,
+        `${apiURL}/groups/${activeGroup._id}/messages`,
         {
           method: "POST",
           headers: {

@@ -4,7 +4,7 @@ import Input from "../Common/Input";
 import PropTypes from "prop-types";
 import "boxicons";
 
-function Signin({ setIsAuthenticated, setToken }) {
+function Signin({ setIsAuthenticated, setToken, apiURL }) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ function Signin({ setIsAuthenticated, setToken }) {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/users/signin", {
+      const response = await fetch(`${apiURL}/users/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,6 +101,7 @@ function Signin({ setIsAuthenticated, setToken }) {
 Signin.propTypes = {
   setIsAuthenticated: PropTypes.func,
   setToken: PropTypes.func,
+  apiURL: PropTypes.string,
 };
 
 export default Signin;

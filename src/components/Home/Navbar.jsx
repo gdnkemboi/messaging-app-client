@@ -1,4 +1,8 @@
 import { NavLink } from "react-router-dom";
+import ChatsIcon from "/src/assets/icons/chats.svg";
+import GroupsIcon from "/src/assets/icons/groups.svg";
+import ContactsIcon from "/src/assets/icons/contacts.svg";
+import NotsIcon from "/src/assets/icons/notifications.svg";
 
 function Navbar() {
   return (
@@ -11,7 +15,7 @@ function Navbar() {
             `icon-container ${isActive ? "active" : ""}`
           }
         >
-          <img src="/src/assets/icons/chats.svg" alt="chats-icon" />
+          <img src={ChatsIcon} alt="chats-icon" />
         </NavLink>
         <NavLink
           to="/groups"
@@ -19,7 +23,7 @@ function Navbar() {
             `icon-container ${isActive ? "active" : ""}`
           }
         >
-          <img src="/src/assets/icons/groups.svg" alt="groups-icon" />
+          <img src={GroupsIcon} alt="groups-icon" />
         </NavLink>
         <NavLink
           to="/contacts"
@@ -27,7 +31,7 @@ function Navbar() {
             `icon-container ${isActive ? "active" : ""}`
           }
         >
-          <img src="/src/assets/icons/contacts.svg" alt="contacts-icon" />
+          <img src={ContactsIcon} alt="contacts-icon" />
         </NavLink>
         <NavLink
           to="/notifications"
@@ -35,10 +39,7 @@ function Navbar() {
             `icon-container ${isActive ? "active" : ""}`
           }
         >
-          <img
-            src="/src/assets/icons/notifications.svg"
-            alt="notifications-icon"
-          />
+          <img src={NotsIcon} alt="notifications-icon" />
         </NavLink>
       </div>
     </div>

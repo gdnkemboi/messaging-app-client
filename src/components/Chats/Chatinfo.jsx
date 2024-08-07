@@ -4,8 +4,15 @@ import "boxicons";
 import { useNavigate } from "react-router-dom";
 
 function Chatinfo() {
-  const { activeChat, user, token, setActiveChat, setChats, setViewChatInfo } =
-    useContext(ChatContext);
+  const {
+    activeChat,
+    user,
+    token,
+    setActiveChat,
+    setChats,
+    setViewChatInfo,
+    apiURL,
+  } = useContext(ChatContext);
   const otherParticipant = activeChat.participants.find(
     (participant) => participant._id !== user._id
   );
@@ -14,7 +21,7 @@ function Chatinfo() {
   const handleBlockUser = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/contacts/${otherParticipant._id}/block`,
+        `${apiURL}/contacts/${otherParticipant._id}/block`,
         {
           method: "PUT",
           headers: {
@@ -39,7 +46,7 @@ function Chatinfo() {
   const handleDeleteChat = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/chats/${activeChat._id}`,
+        `${apiURL}/chats/${activeChat._id}`,
         {
           method: "DELETE",
           headers: {

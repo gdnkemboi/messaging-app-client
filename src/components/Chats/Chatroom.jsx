@@ -4,7 +4,7 @@ import Input from "../Common/Input";
 import "boxicons";
 
 function Chatroom() {
-  const { token, activeChat, user, setViewChatInfo, fetchChats } =
+  const { token, activeChat, user, setViewChatInfo, fetchChats, apiURL } =
     useContext(ChatContext);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -17,7 +17,7 @@ function Chatroom() {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/chats/${activeChat._id}/messages`,
+        `${apiURL}/chats/${activeChat._id}/messages`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function Chatroom() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/messages/${otherParticipant._id}/send`,
+        `${apiURL}/messages/${otherParticipant._id}/send`,
         {
           method: "POST",
           headers: {

@@ -10,6 +10,7 @@ This is a WhatsApp-like Chat application with the following features:
 
 ## TODO
 
+- Implement 404 error page
 - Add options in chatroom and group chat room.
 - Implement delete group feature.
 - Implement contact actions.

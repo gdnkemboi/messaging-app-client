@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { AppContext } from "./App";
 
 const Dashboard = () => {
-  const { token, user } = useContext(AppContext);
+  const { token, user, apiURL } = useContext(AppContext);
 
   return (
     <>
-      <Outlet context={[token, user]} />
+      <Outlet context={{token, user, apiURL}} />
     </>
   );
 };

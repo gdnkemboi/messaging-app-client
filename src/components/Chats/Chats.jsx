@@ -14,10 +14,11 @@ export const ChatContext = createContext({
   user: {},
   setViewChatInfo: () => {},
   fetchChats: () => {},
+  apiURL: "",
 });
 
 function Chats() {
-  const [token, user] = useOutletContext();
+  const { token, user, apiURL } = useOutletContext();
   const [chats, setChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
   const [viewChatInfo, setViewChatInfo] = useState(false);
@@ -26,7 +27,7 @@ function Chats() {
 
   const fetchChats = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/chats", {
+      const response = await fetch(`${apiURL}/chats`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -74,6 +75,7 @@ function Chats() {
           user,
           setViewChatInfo,
           fetchChats,
+          apiURL,
         }}
       >
         <div className="chats">

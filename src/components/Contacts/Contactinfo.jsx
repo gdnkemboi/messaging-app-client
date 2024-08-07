@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "boxicons";
 
-function Contactinfo({ activeContact, token, setActiveContact }) {
+function Contactinfo({ activeContact, token, setActiveContact, apiURL }) {
   const contact = activeContact.contact;
 
   /// TODO ///
@@ -13,7 +13,7 @@ function Contactinfo({ activeContact, token, setActiveContact }) {
   const handleBlockUser = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/contacts/${contact._id}/block`,
+        `${apiURL}/contacts/${contact._id}/block`,
         {
           method: "PUT",
           headers: {
@@ -109,6 +109,7 @@ Contactinfo.propTypes = {
   activeContact: PropTypes.object,
   token: PropTypes.string,
   setActiveContact: PropTypes.func,
+  apiURL: PropTypes.string,
 };
 
 export default Contactinfo;

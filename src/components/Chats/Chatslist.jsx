@@ -5,7 +5,7 @@ import { ChatContext } from "./Chats";
 import Modal from "../Common/Modal";
 
 function Chatslist() {
-  const { chats, setActiveChat, user, token } = useContext(ChatContext);
+  const { chats, setActiveChat, user, token, apiURL } = useContext(ChatContext);
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +13,7 @@ function Chatslist() {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/contacts", {
+        const response = await fetch("${apiURL}/contacts", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ function Chatslist() {
   const handleContactClick = async (contact) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/chats/${contact.contact._id}`,
+        `${apiURL}/chats/${contact.contact._id}`,
         {
           method: "POST",
           headers: {

@@ -12,9 +12,11 @@ export const AppContext = createContext({
   user: {},
   setUser: () => {},
   setIsAuthenticated: () => {},
+  apiURL: "",
 });
 
 function App() {
+  const apiURL = import.meta.env.VITE_API_URL;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -25,16 +27,13 @@ function App() {
   useEffect(() => {
     const validateToken = async (token) => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/users/validate-token",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ token }),
-          }
-        );
+        const response = await fetch(`${apiURL}/users/validate-token`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
         const data = await response.json();
         if (data.valid) {
           setIsAuthenticated(true);
@@ -55,12 +54,12 @@ function App() {
       setLoading(false);
       navigate("/auth/signin");
     }
-  }, [isAuthenticated, navigate]);
+  }, [apiURL, isAuthenticated, navigate]);
 
   useEffect(() => {
     const fetchUserDetails = async (token) => {
       try {
-        const response = await fetch("http://localhost:3000/users/profile", {
+        const response = await fetch(`${apiURL}/users/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +83,7 @@ function App() {
     if (token) {
       fetchUserDetails(token);
     }
-  }, [token]);
+  }, [apiURL, token]);
 
   if (loading) {
     return (
@@ -107,7 +106,14 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ token, setToken, user, setIsAuthenticated, handleLogout }}
+      value={{
+        token,
+        setToken,
+        user,
+        setIsAuthenticated,
+        handleLogout,
+        apiURL,
+      }}
     >
       {isAuthenticated ? (
         user && (

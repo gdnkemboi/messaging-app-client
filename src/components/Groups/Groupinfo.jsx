@@ -14,6 +14,7 @@ function Groupinfo() {
     setGroups,
     setViewGroupInfo,
     fetchGroups,
+    apiURL,
   } = useContext(GroupContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contacts, setContacts] = useState([]);
@@ -28,7 +29,7 @@ function Groupinfo() {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/contacts", {
+        const response = await fetch(`${apiURL}/contacts`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -47,7 +48,7 @@ function Groupinfo() {
     };
 
     fetchContacts();
-  }, [token]);
+  }, [token, apiURL]);
 
   const handleAddMembers = () => {
     setIsModalOpen(true);
@@ -65,7 +66,7 @@ function Groupinfo() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/groups/${activeGroup._id}/members/`,
+        `${apiURL}/groups/${activeGroup._id}/members/`,
         {
           method: "PUT",
           headers: {
@@ -93,7 +94,7 @@ function Groupinfo() {
   const handleLeaveGroup = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/groups/${activeGroup._id}/leave`,
+        `${apiURL}/groups/${activeGroup._id}/leave`,
         {
           method: "PUT",
           headers: {
